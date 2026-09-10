@@ -1,0 +1,67 @@
+
+=== MÓDULO DE USUÁRIOS (/api/usuarios) ===
+
+1. Listar todos os usuários
+   - Método: GET
+   - Rota: http://localhost:8080/api/usuarios
+
+2. Buscar usuário por ID
+   - Método: GET
+   - Rota: http://localhost:8080/api/usuarios/{id}
+
+3. Cadastrar novo usuários
+   - Método: POST
+   - Rota: http://localhost:8080/api/usuarios
+   - Exemplo de Corpo (JSON):
+     {
+       "nome": "Nome Exemplo",
+       "email": "exemplo@email.com",
+       "telefone": "85999999999",
+       "departamento": "TI",
+       "cargo": "Analista"
+     }
+
+4. Atualizar usuário
+   - Método: PUT
+   - Rota: http://localhost:8080/api/usuarios/{id}
+
+5. Deletar usuário
+   - Método: DELETE
+   - Rota: http://localhost:8080/api/usuarios/{id}
+
+
+=== MÓDULO DE CHAMADOS (/api/chamados) ===
+
+1. Listar todos os chamados
+   - Método: GET
+   - Rota: http://localhost:8080/api/chamados
+
+2. Buscar chamado por ID
+   - Método: GET
+   - Rota: http://localhost:8080/api/chamados/{id}
+
+3. Listar chamados por ID do usuário
+   - Método: GET
+   - Rota: http://localhost:8080/api/chamados/usuario/{usuarioId}
+
+4. Criar novo chamado (vinculado a um usuário)
+   - Método: POST
+   - Rota: http://localhost:8080/api/chamados[cite: 3]
+   - Exemplo de Corpo (JSON):
+     {
+       "titulo": "Problema técnico",
+       "descricao": "Descrição detalhada docorrido",
+       "status": "ABERTO",
+       "prioridade": "ALTA",
+       "usuario": {
+         "id": 1
+       }
+     }
+
+5. Atualizar chamado
+   - Método: PUT
+   - Rota: http://localhost:8080/api/chamados/{id}
+
+6. Deletar chamado
+   - Método: DELETE
+   - Rota: http://localhost:8080/api/chamados/{id}

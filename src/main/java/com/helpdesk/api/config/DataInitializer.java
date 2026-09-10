@@ -12,18 +12,13 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
-
-    
     private final UsuarioRepository usuarioRepository;
-
     private final ChamadoRepository chamadoRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        // Popula apenas se a tabela de usuários estiver vazia
         if (usuarioRepository.count() == 0) {
             
-            // 1. Criando os 3 Usuários
             Usuario u1 = new Usuario();
             u1.setNome("Carlos Silva");
             u1.setEmail("carlos@empresa.com");
@@ -48,7 +43,6 @@ public class DataInitializer implements CommandLineRunner {
             u3.setCargo("Assistente");
             u3 = usuarioRepository.save(u3);
 
-            // 2. Criando os 3 Chamados (vinculados aos Usuários)
             Chamado c1 = new Chamado();
             c1.setTitulo("Erro no Monitor");
             c1.setDescricao("O monitor não liga na tomada do RH.");

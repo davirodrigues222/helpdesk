@@ -22,13 +22,11 @@ public class ChamadoController {
 
     private final UsuarioRepository usuarioRepository;
 
-    // 1. lista todos os chamados
     @GetMapping
     public List<Chamado> listarTodos() {
         return chamadoRepository.findAll();
     }
 
-    // 2. Busca um chamado por um id
     @GetMapping("/{id}")
     public ResponseEntity<Chamado> buscarPorId(@PathVariable Long id) {
         return chamadoRepository.findById(id)
@@ -36,7 +34,6 @@ public class ChamadoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 3. Listar chamados por ID do usuário
     @GetMapping("/usuario/{usuarioId}")
     public ResponseEntity<List<Chamado>> listarPorUsuario(@PathVariable Long usuarioId) {
         if (!usuarioRepository.existsById(usuarioId)) {
@@ -45,7 +42,6 @@ public class ChamadoController {
         return ResponseEntity.ok(chamadoRepository.findByUsuarioId(usuarioId));
     }
 
-    // 4. Cria chamado se o usuario existir
     @PostMapping
     public ResponseEntity<?> criar(@RequestBody Chamado chamado) {
         if (chamado.getUsuario() == null || chamado.getUsuario().getId() == null) {
@@ -61,7 +57,6 @@ public class ChamadoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novoChamado);
     }
 
-    // 5. atualizar CHAMADO
     @PutMapping("/{id}")
     public ResponseEntity<Chamado> atualizar(@PathVariable Long id, @RequestBody Chamado chamadoAtualizado) {
         return chamadoRepository.findById(id).map(chamado -> {
@@ -74,7 +69,6 @@ public class ChamadoController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    // 6. DELETAR CHAMADO
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         if (!chamadoRepository.existsById(id)) {

@@ -15,11 +15,10 @@ public class Chamado {
 
     private String titulo;
     private String descricao;
-    private String status;       // Ex: ABERTO, EM_ANDAMENTO, FECHADO
-    private String prioridade;   // Ex: BAIXA, MEDIA, ALTA
+    private String status;       
+    private String prioridade;   
     private LocalDateTime dataAbertura = LocalDateTime.now();
 
-    // RELACIONAMENTO: Muitos chamados pertencem a Um usuário
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;

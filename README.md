@@ -4,18 +4,17 @@
 **Equipe:** David Frota e Davi Rodrigues
 
 ## Descrição do Projeto
-Esta API REST foi desenvolvida em Java com Spring Boot e PostgreSQL para gerenciar um sistema de Helpdesk (Suporte de TI). O projeto atende integralmente aos requisitos propostos, expondo dois recursos principais (**Usuários** e **Chamados**), cada um estruturado com pelo menos **7 campos de informação**[cite: 1]. 
+Esta API REST foi desenvolvida em Java com Spring Boot e PostgreSQL para gerenciar um sistema de Helpdesk (Suporte de TI). O projeto atende integralmente aos requisitos propostos, expondo dois recursos principais (**Usuários** e **Chamados**), cada um estruturado com pelo menos **7 campos de informação**. 
 
-A aplicação conta com um CRUD completo (operações de listar todos, mostrar por ID, criar, editar e apagar) para ambos os recursos, aplicando regras de integridade relacional, tratamento de *status codes* HTTP adequados e uma carga automática de dados iniciais[cite: 1].
+A aplicação conta com um CRUD completo (operações de listar todos, mostrar por ID, criar, editar e apagar) para ambos os recursos, aplicando regras de integridade relacional, tratamento de *status codes* HTTP adequados e uma carga automática de dados iniciais.
 
 ---
 
 ## Tecnologias e Arquitetura
-* **Linguagem:** Java 17[cite: 1]
+* **Linguagem:** Java 21
 * **Framework:** Spring Boot (com Spring Data JPA e Spring Web)
 * **Banco de Dados:** PostgreSQL (Hospedado no Supabase)
-* **Deploy/Hospedagem da API:** Railway
-* **Controle de Versão:** GitHub[cite: 1]
+* **Controle de Versão:** GitHub
 
 ---
 
@@ -43,12 +42,12 @@ A aplicação conta com um CRUD completo (operações de listar todos, mostrar p
 
 ## Como Utilizar a API (Endpoints e Status Codes)
 
-A aplicação retorna respostas em formato JSON acompanhadas dos códigos de status HTTP corretos para validação[cite: 1].
+A aplicação retorna respostas em formato JSON acompanhadas dos códigos de status HTTP corretos para validação.
 
-### Endpoints de Usuários (`/usuarios`)
-* **`GET /usuarios`** — Lista todos os usuários cadastrados[cite: 1]. *(Retorna status `200 OK`)*[cite: 1]
-* **`GET /usuarios/{id}`** — Mostra os detalhes de um usuário específico[cite: 1]. *(Retorna status `200 OK` ou `404 Not Found`)*[cite: 1]
-* **`POST /usuarios`** — Cadastra um novo usuário no sistema[cite: 1]. *(Retorna status `201 Created`)*[cite: 1]
+### Endpoints de Usuários (`api/usuarios`)
+* **`GET api/usuarios`** — Lista todos os usuários cadastrados[cite: 1]. *(Retorna status `200 OK`)*
+* **`GET api/usuarios/{id}`** — Mostra os detalhes de um usuário específico. *(Retorna status `200 OK` ou `404 Not Found`)*
+* **`POST api/usuarios`** — Cadastra um novo usuário no sistema[cite: 1]. *(Retorna status `201 Created`)*
   * *Exemplo de Corpo (JSON):*
     ```json
     {
@@ -59,14 +58,14 @@ A aplicação retorna respostas em formato JSON acompanhadas dos códigos de sta
       "cargo": "Vendedora"
     }
     ```
-* **`PUT /usuarios/{id}`** — Atualiza os dados de um usuário existente[cite: 1]. *(Retorna status `200 OK` ou `404 Not Found`)*[cite: 1]
-* **`DELETE /usuarios/{id}`** — Remove um usuário e seus chamados associados[cite: 1]. *(Retorna status `204 No Content` ou `404 Not Found`)*[cite: 1]
+* **`PUT api/usuarios/{id}`** — Atualiza os dados de um usuário existente[cite: 1]. *(Retorna status `200 OK` ou `404 Not Found`)*
+* **`DELETE api/usuarios/{id}`** — Remove um usuário e seus chamados associados[cite: 1]. *(Retorna status `204 No Content` ou `404 Not Found`)*
 
-### Endpoints de Chamados (`/chamados`)
-* **`GET /chamados`** — Lista todos os chamados abertos no sistema[cite: 1]. *(Retorna status `200 OK`)*[cite: 1]
-* **`GET /chamados/{id}`** — Mostra um chamado específico pelo ID[cite: 1]. *(Retorna status `200 OK` ou `404 Not Found`)*[cite: 1]
-* **`GET /chamados/usuario/{usuarioId}`** — Rota customizada para listar todos os chamados abertos por um funcionário específico. *(Retorna status `200 OK`)*[cite: 1]
-* **`POST /chamados`** — Cria um novo ticket de suporte vinculado a um usuário existente[cite: 1]. *(Retorna status `201 Created` ou `400 Bad Request` se o usuário não existir)*
+### Endpoints de Chamados (`api/chamados`)
+* **`GET api/chamados`** — Lista todos os chamados abertos no sistema[cite: 1]. *(Retorna status `200 OK`)*
+* **`GET api/chamados/{id}`** — Mostra um chamado específico pelo ID[cite: 1]. *(Retorna status `200 OK` ou `404 Not Found`)*
+* **`GET api/chamados/usuario/{usuarioId}`** — Rota customizada para listar todos os chamados abertos por um funcionário específico. *(Retorna status `200 OK`)*
+* **`POST api/chamados`** — Cria um novo ticket de suporte vinculado a um usuário existente[cite: 1]. *(Retorna status `201 Created` ou `400 Bad Request` se o usuário não existir)*
   * *Exemplo de Corpo (JSON):*
     ```json
     {
@@ -79,8 +78,8 @@ A aplicação retorna respostas em formato JSON acompanhadas dos códigos de sta
       }
     }
     ```
-* **`PUT /chamados/{id}`** — Edita as informações de um chamado[cite: 1]. *(Retorna status `200 OK` ou `404 Not Found`)*[cite: 1]
-* **`DELETE /chamados/{id}`** — Apaga um chamado do sistema[cite: 1]. *(Retorna status `204 No Content` ou `404 Not Found`)*[cite: 1]
+* **`PUT api/chamados/{id}`** — Edita as informações de um chamado[cite: 1]. *(Retorna status `200 OK` ou `404 Not Found`)*
+* **`DELETE api/chamados/{id}`** — Apaga um chamado do sistema[cite: 1]. *(Retorna status `204 No Content` ou `404 Not Found`)*
 
 ---
 
@@ -91,7 +90,7 @@ Para cumprir a exigência de popular a aplicação, o sistema possui uma classe 
 
 ## Como Rodar o Projeto Localmente
 
-1. Clone o repositório em sua máquina[cite: 1]:
+1. Clone o repositório em sua máquina:
    ```bash
    git clone [https://github.com/davirodrigues222/helpdesk.git](https://github.com/davirodrigues222/helpdesk.git)
 
