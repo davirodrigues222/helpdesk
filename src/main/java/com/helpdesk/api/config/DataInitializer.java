@@ -4,18 +4,19 @@ import com.helpdesk.api.model.Chamado;
 import com.helpdesk.api.model.Usuario;
 import com.helpdesk.api.repository.ChamadoRepository;
 import com.helpdesk.api.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    
+    private final UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private ChamadoRepository chamadoRepository;
+    private final ChamadoRepository chamadoRepository;
 
     @Override
     public void run(String... args) throws Exception {

@@ -2,7 +2,8 @@ package com.helpdesk.api.controller;
 
 import com.helpdesk.api.model.Usuario;
 import com.helpdesk.api.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuarios")
+@RequiredArgsConstructor
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioRepository repository;
+    private final UsuarioRepository repository;
 
     @GetMapping
     public List<Usuario> listarTodos() {
