@@ -3,6 +3,9 @@ package com.helpdesk.api.controller;
 import com.helpdesk.api.model.Chamado;
 import com.helpdesk.api.repository.ChamadoRepository;
 import com.helpdesk.api.repository.UsuarioRepository;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,21 +15,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/chamados")
+@RequiredArgsConstructor
 public class ChamadoController {
 
-    @Autowired
-    private ChamadoRepository chamadoRepository;
+    private final ChamadoRepository chamadoRepository;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    // 1. LISTAR TODOS OS CHAMADOS
+    // 1. lista todos os chamados
     @GetMapping
     public List<Chamado> listarTodos() {
         return chamadoRepository.findAll();
     }
 
-    // 2. BUSCAR CHAMADO POR ID
+    // 2. Busca um chamado por um id
     @GetMapping("/{id}")
     public ResponseEntity<Chamado> buscarPorId(@PathVariable Long id) {
         return chamadoRepository.findById(id)
@@ -34,7 +36,7 @@ public class ChamadoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 3. BUSCA INTELIGENTE: Listar chamados por ID do usuário
+    // 3. Listar chamados por ID do usuário
     @GetMapping("/usuario/{usuarioId}")
     public ResponseEntity<List<Chamado>> listarPorUsuario(@PathVariable Long usuarioId) {
         if (!usuarioRepository.existsById(usuarioId)) {
@@ -43,7 +45,7 @@ public class ChamadoController {
         return ResponseEntity.ok(chamadoRepository.findByUsuarioId(usuarioId));
     }
 
-    // 4. CRIAR CHAMADO (Com trava de segurança para validar se usuário existe)
+    // 4. Cria chamado se o usuario existir
     @PostMapping
     public ResponseEntity<?> criar(@RequestBody Chamado chamado) {
         if (chamado.getUsuario() == null || chamado.getUsuario().getId() == null) {
@@ -59,7 +61,7 @@ public class ChamadoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novoChamado);
     }
 
-    // 5. EDITAR CHAMADO
+    // 5. atualizar CHAMADO
     @PutMapping("/{id}")
     public ResponseEntity<Chamado> atualizar(@PathVariable Long id, @RequestBody Chamado chamadoAtualizado) {
         return chamadoRepository.findById(id).map(chamado -> {
